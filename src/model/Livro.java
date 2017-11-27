@@ -43,6 +43,18 @@ public class Livro {
 	public Livro() {
 
 	}
+	
+	public void setNome(String nome){
+		this.nome = nome;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+	
+	public long getId() {
+		return id;
+	}
 
 	public void addAutor(Autor a){
 		autores.add(a);
@@ -64,11 +76,5 @@ public class Livro {
 		return nomes;
 	}
 	
-	public void setNome(String nome){
-		this.nome = nome;
-	}
 	
-	public String getNome() {
-		return nome;
-	}
 }

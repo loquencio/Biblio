@@ -11,11 +11,14 @@
 </h:head>
 
 <h:body>
-	<h:form>
-		<p:growl globalOnly="true" showSummary="true" showDetail="false"
-			tooltip="true" sticky="true"/>
-		<p:inputText value="#{livroBean.livroAtual.nome}" />
-		<h:commandButton value="Adicionar" action="#{livroBean.adicionar}" />
-	</h:form>
+	<p:dataTable value="#{livroBean.livros}" var="livro" >
+		<p:column headerText="Id">
+			<h:outputText value="#{livro.id}"/>
+		</p:column>
+	
+		<p:column headerText="Nome">
+			<h:outputText value="#{livro.nome}"/>
+		</p:column>
+	</p:dataTable>
 </h:body>
 </html>

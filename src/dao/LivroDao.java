@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -21,6 +23,11 @@ public class LivroDao implements ILivroDao{
 	@Override
 	public Livro procurar(long id) {
 		return em.find(Livro.class, (long) id);
+	}
+
+	@Override
+	public List<Livro> buscarTodos() {
+		return em.createQuery("select l from livros l", Livro.class).getResultList();
 	}
 
 }
