@@ -68,4 +68,7 @@ public class Livro {
 		this.nome = nome;
 	}
 	
+	public String getNome() {
+		return nome;
+	}
 }
