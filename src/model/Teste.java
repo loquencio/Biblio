@@ -11,7 +11,7 @@ public class Teste {
 		ILivroDao ld = new LivroDao();
 		Livro l = new Livro();
 		l.setNome("Teste");
-		
+		l.setResumo("á é í ó ú");
 		ld.persistir(l);
 	}
 }

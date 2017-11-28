@@ -23,7 +23,7 @@ public class Livro {
 	private String nome;
 
 	@Column(length = 500)
-	private String descricao;
+	private String resumo;
 
 	@Column(name = "data_de_lancamento")
 	private Date lancamento;
@@ -33,48 +33,42 @@ public class Livro {
 			@JoinColumn(name = "autor_id") })
 	private Set<Autor> autores;
 
-	public Livro(String nome, String descricao, Date lancamento) {
-		// this.id = id;
-		this.nome = nome;
-		this.descricao = descricao;
-		this.lancamento = lancamento;
-	}
-
 	public Livro() {
 
-	}
-	
-	public void setNome(String nome){
-		this.nome = nome;
-	}
-	
-	public String getNome() {
-		return nome;
 	}
 	
 	public long getId() {
 		return id;
 	}
-
+	
+	public void setNome(String nome){
+		this.nome = nome;
+	}	
+	public String getNome() {
+		return nome;
+	}
+	
+	public void setLancamento(Date lancamento) {
+		this.lancamento = lancamento;
+	}
+	public Date getLancamento() {
+		return lancamento;
+	}
+	
+	public void setResumo(String resumo) {
+		this.resumo = resumo;
+	}
+	public String getResumo() {
+		return resumo;
+	}
+	
 	public void addAutor(Autor a){
 		autores.add(a);
 	}
 
 	@Override
 	public String toString() {
-		return "Livro [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", lancamento=" + lancamento
-				+ ", autores=" + nomesDosAutores() + "]";
+		return "Livro [id=" + id + ", nome=" + nome + ", resumo=" + resumo + ", lancamento=" + lancamento
+				+ ", autores=]";
 	}
-	
-	public String nomesDosAutores(){
-		String nomes = "";
-		
-		for (Autor a : autores){
-			nomes += a.getNome() + ", ";
-		}
-		
-		return nomes;
-	}
-	
-	
 }
