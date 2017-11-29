@@ -3,24 +3,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Insert title here</title>
-</h:head>
-<h:body>
-	<p:growl id="growl" globalOnly="true" showDetail="false" life="2000"/>
-	<h:form>
-		<h:panelGrid columns="1">
-			<h:outputLabel value="Nome" />
-			<p:inputText value="#{livroBean.livroAtual.nome}" placeholder="Nome" styleClass="ui-panel-titlebar"/>
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-			<br />
-			<h:outputLabel value="Resumo" />
-			<p:inputTextarea value="#{livroBean.livroAtual.resumo}" />
+<ui:composition template="/WEB-INF/template/layout.xhtml">
+	<ui:define name="title">Gestão de Livros</ui:define>
+	<ui:define name="content">
+		<h:form>
+			<h:panelGrid columns="1">
+				<p:outputLabel value="Nome" />
+				<!-- <h:outputLabel value="Nome" /> -->
+				<p:inputText value="#{livroBean.livroAtual.nome}" placeholder="Nome"
+					styleClass="ui-panel-titlebar" />
 
-			<p:commandButton icon="ui-icon-disk" actionListener="#{livroBean.adicionar}" ajax="true"/>
-		</h:panelGrid>
-	</h:form>
-</h:body>
+				<br />
+				<h:outputLabel value="Resumo" />
+				<p:inputTextarea value="#{livroBean.livroAtual.resumo}" />
+
+				<p:commandButton icon="ui-icon-disk"
+					actionListener="#{livroBean.adicionar}" ajax="false"/>
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
 </html>

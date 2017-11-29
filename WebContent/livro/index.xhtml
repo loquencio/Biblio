@@ -22,13 +22,14 @@
 			</h:dataTable>
 
 		</h:panelGrid>
-		<h:panelGrid width="500px">
+		<h:panelGrid>
 			<p:dataTable value="#{livroBean.livros}" var="livro"
 				style="vertical-align: middle">
 				<p:column headerText="Id">
-					<h:outputText value="#{livro.id}" />
+					<h:link outcome="pretty:livros-add">
+						<h:outputText value="#{livro.id}" />
+					</h:link>
 				</p:column>
-
 				<p:column headerText="Nome">
 					<h:outputText value="#{livro.nome}" />
 				</p:column>
