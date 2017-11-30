@@ -9,21 +9,44 @@
 <ui:composition template="/WEB-INF/template/layout.xhtml">
 	<ui:define name="title">Gestão de Livros</ui:define>
 	<ui:define name="content">
-		<h:form>
-			<h:panelGrid columns="1">
-				<p:outputLabel value="Nome" />
-				<!-- <h:outputLabel value="Nome" /> -->
-				<p:inputText value="#{livroBean.livroAtual.nome}" placeholder="Nome"
-					styleClass="ui-panel-titlebar" />
 
-				<br />
-				<h:outputLabel value="Resumo" />
-				<p:inputTextarea value="#{livroBean.livroAtual.resumo}" />
+		<div class="center_content">
+			<center>
+				<h:form>
+					<p:panel id="panel" header="Sign-Up Form">
+						<p:messages globalOnly="true" />
+						<h:panelGrid columns="1" cellpadding="5px" cellspacing="3px">
 
-				<p:commandButton icon="ui-icon-disk"
-					actionListener="#{livroBean.adicionar}" ajax="false"/>
-			</h:panelGrid>
-		</h:form>
+							<p:outputLabel value="Name" />
+							<h:panelGrid columns="4">
+								<p:inputText id="fname" value="#{livroBean.livroAtual.nome}"
+									required="true" requiredMessage="Enter First name">
+									<p:watermark value="First Name" for="fname" />
+								</p:inputText>
+							</h:panelGrid>
+						</h:panelGrid>
+					</p:panel>
+				</h:form>
+			</center>
+		</div>
+		<center>
+			<h:form>
+				<h:panelGrid columns="1">
+					<p:outputLabel value="Nome" />
+					<!-- <h:outputLabel value="Nome" /> -->
+					<p:inputText value="#{livroBean.livroAtual.nome}"
+						styleClass="ui-panel-titlebar" />
+
+					<br />
+					<p:outputLabel value="Resumo" />
+					<p:inputTextarea value="#{livroBean.livroAtual.resumo}" rows="10"
+						cols="75" />
+
+					<p:commandButton icon="ui-icon-disk"
+						actionListener="#{livroBean.adicionar}" ajax="false" />
+				</h:panelGrid>
+			</h:form>
+		</center>
 	</ui:define>
 </ui:composition>
 </html>
