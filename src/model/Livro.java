@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,10 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity(name = "livros")
-@Table(name="livros")
+@Table(name = "livros")
 public class Livro {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,41 +33,56 @@ public class Livro {
 	@Column(name = "data_de_lancamento")
 	private Date lancamento;
 
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "escrito_por", joinColumns = { @JoinColumn(name = "livro_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "autor_id") })
 	private Set<Autor> autores;
 
-	public Livro() {
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "editora_id")
+	private Editora editora;
 
+	public Livro() {
+		this.autores = new HashSet<Autor>();
 	}
-	
+
 	public long getId() {
 		return id;
 	}
-	
-	public void setNome(String nome){
+
+	public void setNome(String nome) {
 		this.nome = nome;
-	}	
+	}
+
 	public String getNome() {
 		return nome;
 	}
-	
+
 	public void setLancamento(Date lancamento) {
 		this.lancamento = lancamento;
 	}
+
 	public Date getLancamento() {
 		return lancamento;
 	}
-	
+
 	public void setResumo(String resumo) {
 		this.resumo = resumo;
 	}
+
 	public String getResumo() {
 		return resumo;
 	}
-	
-	public void addAutor(Autor a){
+
+	public void setEditora(Editora editora) {
+		this.editora = editora;
+	}
+
+	public Editora getEditora() {
+		return editora;
+	}
+
+	public void addAutor(Autor a) {
 		autores.add(a);
 	}
 

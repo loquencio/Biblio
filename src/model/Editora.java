@@ -1,19 +1,26 @@
 package model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity(name = "autores")
-public class Autor {
+@Entity(name = "editoras")
+public class Editora {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+
+	@Column(unique = true)
 	private String nome;
 
-	public Autor() {
+	/*
+	 * @OneToMany(mappedBy = "editora", cascade = CascadeType.ALL, targetEntity =
+	 * Livro.class) private List<Livro> livros;
+	 */
+	public Editora() {
 	}
 
 	public long getId() {
@@ -27,4 +34,5 @@ public class Autor {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 }
