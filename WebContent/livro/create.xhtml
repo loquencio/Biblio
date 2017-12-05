@@ -42,8 +42,8 @@
 									completeMethod="#{autoCompleteView.completeText}" />
  -->
 								<p:outputLabel value="Editora" for="editora" />
-								<p:autoComplete id="editora" forceSelection="true"
-									value="#{livroBean.livroAtual.editora}"
+								<p:autoComplete id="editora" forceSelection="false"
+									dropdown="true" value="#{livroBean.livroAtual.editora}"
 									completeMethod="#{editoraBean.completeEditora}" var="editora"
 									itemLabel="#{editora.nome}" itemValue="#{editora}"
 									converter="editoraConverter" />

@@ -11,20 +11,26 @@ import dao.EditoraDao;
 import dao.IEditoraDao;
 import model.Editora;
 
-
-
 @FacesConverter("editoraConverter")
-public class EditoraConverter implements Converter{
+public class EditoraConverter implements Converter {
 
 	@Override
 	public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
 		if (value != null && value.trim().length() > 0) {
-			try {
-				IEditoraDao ed = new EditoraDao();
-				return ed.buscaPorId(Long.parseLong(value));
-			} catch (NumberFormatException e) {
-				throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid theme."));
+
+			IEditoraDao ed = new EditoraDao();
+			Editora e = ed.buscaPorId(Long.parseLong(value));
+
+			if (e == null) {
+				e = ed.buscaPorNomeIgual(value);
+
+				if (e == null) {
+					e = new Editora();
+					e.setNome(value);
+				}
 			}
+
+			return e;
 		}
 		return null;
 	}
@@ -32,10 +38,13 @@ public class EditoraConverter implements Converter{
 	@Override
 	public String getAsString(FacesContext fc, UIComponent uic, Object obj) {
 		if (obj != null) {
-			return String.valueOf(((Editora) obj).getId());
+			System.out.println(((Editora) obj).getNome());
+			String retorno;
+			return (retorno = String.valueOf(((Editora) obj).getId())) == "0"
+					? String.valueOf(((Editora) obj).getNome()) : retorno;
 		} else {
 			return null;
 		}
 	}
-	
+
 }

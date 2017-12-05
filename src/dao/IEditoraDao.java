@@ -9,4 +9,5 @@ public interface IEditoraDao {
 	List<Editora> buscaTodas();
 	Editora buscaPorId(long id);
 	Editora buscaPorNomeIgual(String nome);
+	List<Editora> buscaPorNomeParecido(String nome);
 }

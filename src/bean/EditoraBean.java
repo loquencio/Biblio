@@ -18,14 +18,11 @@ public class EditoraBean implements Serializable {
 	private IEditoraDao ed = new EditoraDao();
 
 	public List<Editora> completeEditora(String query) {
-		List<Editora> editoras = ed.buscaTodas();
-		List<Editora> filtradas = new ArrayList<Editora>();
-
-		for (int i = 0; i < editoras.size(); i++) {
-			Editora e = editoras.get(i);
-
-			if (e.getNome().toLowerCase().startsWith(query.toLowerCase()))
-				filtradas.add(e);
+		List<Editora> filtradas = ed.buscaPorNomeParecido(query);
+		if (filtradas.size() <= 0 && !query.isEmpty()) {
+			Editora e = new Editora();
+			e.setNome(query);
+			filtradas.add(e);
 		}
 
 		return filtradas;

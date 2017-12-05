@@ -50,23 +50,11 @@ public class LivroBean implements Serializable {
 
 	public void adicionar() {
 		// livroAtual.setLancamento(new Date());
+		if (ed.buscaPorNomeIgual(livroAtual.getEditora().getNome()) == null)
+			ed.persistir(livroAtual.getEditora());
 		ld.persistir(livroAtual);
 		livroAtual = new Livro();
 		FacesMessage msg = new FacesMessage("Livro adicionado!");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-	}
-
-	public List<Editora> completeEditora(String query) {
-		List<Editora> editoras = ed.buscaTodas();
-		List<Editora> filtradas = new ArrayList<Editora>();
-
-		for (int i = 0; i < editoras.size(); i++) {
-			Editora e = editoras.get(i);
-
-			if (e.getNome().toLowerCase().startsWith(query.toLowerCase()))
-				filtradas.add(e);
-		}
-
-		return filtradas;
 	}
 }
