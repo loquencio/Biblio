@@ -27,7 +27,7 @@ public class Livro {
 	@Column(nullable = false)
 	private String nome;
 
-	@Column(length = 500)
+	@Column(length = 4000)
 	private String resumo;
 
 	@Column(name = "data_de_lancamento")

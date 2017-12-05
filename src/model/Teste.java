@@ -21,21 +21,23 @@ public class Teste {
 		l.setNome("Subsolo");
 		l.setResumo("Felicidade");
 		
-		if ((ed.buscaPorNomeIgual("Editora")) == null) {
+//		if ((ed.buscaPorNomeIgual("Editora")) == null) {
 			e = new Editora();
 			e.setNome("Editora");
-		} else {
-			e = ed.buscaPorNomeIgual("Editora");
-		}
+			ed.persistir(e);
+//		} else {
+//			e = ed.buscaPorNomeIgual("Editora");
+//		}
 		
 		l.setEditora(e);
 		
-		if ((ad.buscaPorNomeIgual("Tururu")) == null) {
+//		if ((ad.buscaPorNomeIgual("Tururu")) == null) {
 			a = new Autor();
 			a.setNome("Tururu");
-		} else {
-			a = ad.buscaPorNomeIgual("Tururu");
-		}
+			ad.persistir(a);
+//		} else {
+//			a = ad.buscaPorNomeIgual("Tururu");
+//		}
 		
 		l.addAutor(a);
 		ld.persistir(l);

@@ -13,20 +13,24 @@ import javax.faces.context.FacesContext;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
 
+import dao.EditoraDao;
+import dao.IEditoraDao;
 import dao.ILivroDao;
 import dao.LivroDao;
+import model.Editora;
 import model.Livro;
 
 @ManagedBean
 @RequestScoped
 @URLMappings(mappings = { @URLMapping(id = "livros-index-1", pattern = "/livro", viewId = "/livro/index.xhtml"),
 		@URLMapping(id = "livros-index-2", pattern = "/livro/", viewId = "/livro/index.xhtml"),
-		@URLMapping(id = "livros-add", pattern="/livro/add", viewId = "/livro/create.xhtml")})
+		@URLMapping(id = "livros-add", pattern = "/livro/add", viewId = "/livro/create.xhtml") })
 public class LivroBean implements Serializable {
 	private static final long serialVersionUID = 3295081925699767392L;
 	private Livro livroAtual = new Livro();
 	private ILivroDao ld = new LivroDao();
 	private List<Livro> livros = ld.buscarTodos();
+	private IEditoraDao ed = new EditoraDao();
 
 	public void setLivroAtual(Livro l) {
 		this.livroAtual = l;
@@ -45,10 +49,24 @@ public class LivroBean implements Serializable {
 	}
 
 	public void adicionar() {
-//		livroAtual.setLancamento(new Date());
+		// livroAtual.setLancamento(new Date());
 		ld.persistir(livroAtual);
 		livroAtual = new Livro();
 		FacesMessage msg = new FacesMessage("Livro adicionado!");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+
+	public List<Editora> completeEditora(String query) {
+		List<Editora> editoras = ed.buscaTodas();
+		List<Editora> filtradas = new ArrayList<Editora>();
+
+		for (int i = 0; i < editoras.size(); i++) {
+			Editora e = editoras.get(i);
+
+			if (e.getNome().toLowerCase().startsWith(query.toLowerCase()))
+				filtradas.add(e);
+		}
+
+		return filtradas;
 	}
 }

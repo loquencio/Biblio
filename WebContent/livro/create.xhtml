@@ -18,7 +18,7 @@
 						<p:panel id="panel" header="Adicionar Livro">
 							<p:messages globalOnly="true" />
 							<h:panelGrid columns="1" cellpadding="5px" cellspacing="3px">
-								<p:outputLabel value="Título" for="nome"/>
+								<p:outputLabel value="Título" for="nome" />
 								<h:panelGrid columns="4">
 									<p:inputText id="nome" value="#{livroBean.livroAtual.nome}"
 										required="true" requiredMessage="Entre o título do livro">
@@ -26,20 +26,27 @@
 									</p:inputText>
 								</h:panelGrid>
 
-								<p:outputLabel value="Resumo" for="resumo"/>
+								<p:outputLabel value="Resumo" for="resumo" />
 								<h:panelGrid columns="4">
 									<p:inputTextarea id="resumo" rows="10" cols="75"
 										value="#{livroBean.livroAtual.resumo}" required="false" />
 								</h:panelGrid>
 
-								<p:outputLabel value="Data de publicação" for="data"/>
+								<p:outputLabel value="Data de publicação" for="data" />
 								<p:calendar id="data" value="#{livroBean.livroAtual.lancamento}"
 									pattern="dd-MM-yyyy" mask="true" />
 
-								<p:outputLabel value="Editora" for="dd" />
+								<!-- 	<p:outputLabel value="Editora" for="dd" />
 								<p:autoComplete id="dd" dropdown="true"
 									value="#{autoCompleteView.txt6}"
 									completeMethod="#{autoCompleteView.completeText}" />
+ -->
+								<p:outputLabel value="Editora" for="editora" />
+								<p:autoComplete id="editora" forceSelection="true"
+									value="#{livroBean.livroAtual.editora}"
+									completeMethod="#{editoraBean.completeEditora}" var="editora"
+									itemLabel="#{editora.nome}" itemValue="#{editora}"
+									converter="editoraConverter" />
 
 
 								<p:commandButton icon="ui-icon-disk"
