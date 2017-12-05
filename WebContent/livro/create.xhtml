@@ -13,43 +13,44 @@
 		<div class="center_content">
 			<center>
 				<h:form>
-					<p:panel id="panel" header="Sign-Up Form">
-						<p:messages globalOnly="true" />
-						<h:panelGrid columns="1" cellpadding="5px" cellspacing="3px">
+					<div class="center_content">
 
-							<p:outputLabel value="Name" />
-							<h:panelGrid columns="4">
-								<p:inputText id="fname" value="#{livroBean.livroAtual.nome}"
-									required="true" requiredMessage="Enter First name">
-									<p:watermark value="First Name" for="fname" />
-								</p:inputText>
-								<p:inputText id="lname" required="true" requiredMessage="Enter last name">
-									<p:watermark value="Last Name" for="lname" />
-								</p:inputText>
+						<p:panel id="panel" header="Adicionar Livro">
+							<p:messages globalOnly="true" />
+							<h:panelGrid columns="1" cellpadding="5px" cellspacing="3px">
+								<p:outputLabel value="Título" for="nome"/>
+								<h:panelGrid columns="4">
+									<p:inputText id="nome" value="#{livroBean.livroAtual.nome}"
+										required="true" requiredMessage="Entre o título do livro">
+										<p:watermark value="Título do livro" for="nome" />
+									</p:inputText>
+								</h:panelGrid>
+
+								<p:outputLabel value="Resumo" for="resumo"/>
+								<h:panelGrid columns="4">
+									<p:inputTextarea id="resumo" rows="10" cols="75"
+										value="#{livroBean.livroAtual.resumo}" required="false" />
+								</h:panelGrid>
+
+								<p:outputLabel value="Data de publicação" for="data"/>
+								<p:calendar id="data" value="#{livroBean.livroAtual.lancamento}"
+									pattern="dd-MM-yyyy" mask="true" />
+
+								<p:outputLabel value="Editora" for="dd" />
+								<p:autoComplete id="dd" dropdown="true"
+									value="#{autoCompleteView.txt6}"
+									completeMethod="#{autoCompleteView.completeText}" />
+
+
+								<p:commandButton icon="ui-icon-disk"
+									actionListener="#{livroBean.adicionar}" ajax="false" />
+
 							</h:panelGrid>
-						</h:panelGrid>
-					</p:panel>
+						</p:panel>
+					</div>
 				</h:form>
 			</center>
 		</div>
-		<center>
-			<h:form>
-				<h:panelGrid columns="1">
-					<p:outputLabel value="Nome" />
-					<!-- <h:outputLabel value="Nome" /> -->
-					<p:inputText value="#{livroBean.livroAtual.nome}"
-						styleClass="ui-panel-titlebar" />
-
-					<br />
-					<p:outputLabel value="Resumo" />
-					<p:inputTextarea value="#{livroBean.livroAtual.resumo}" rows="10"
-						cols="75" />
-
-					<p:commandButton icon="ui-icon-disk"
-						actionListener="#{livroBean.adicionar}" ajax="false" />
-				</h:panelGrid>
-			</h:form>
-		</center>
 	</ui:define>
 </ui:composition>
 </html>

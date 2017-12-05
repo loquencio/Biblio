@@ -45,7 +45,7 @@ public class LivroBean implements Serializable {
 	}
 
 	public void adicionar() {
-		livroAtual.setLancamento(new Date());
+//		livroAtual.setLancamento(new Date());
 		ld.persistir(livroAtual);
 		livroAtual = new Livro();
 		FacesMessage msg = new FacesMessage("Livro adicionado!");
