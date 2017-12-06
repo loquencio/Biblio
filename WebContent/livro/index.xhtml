@@ -34,10 +34,23 @@
 					<h:outputText value="#{livro.nome}" />
 				</p:column>
 
+				<p:column headerText="Autor(es)">
+					<ul style="list-style-type: none;">
+						<ui:repeat value="#{livro.autores}" var="autor">
+							<li style="float: left;"><h:outputText value="#{autor.nome}" /></li>
+						</ui:repeat>
+					</ul>
+				</p:column>
+
 				<p:column headerText="Data">
 					<h:outputText value="#{livro.lancamento}">
-						<f:convertDateTime pattern="dd-MM-yyyy"/>
+						<f:convertDateTime pattern="dd-MM-yyyy" />
 					</h:outputText>
+				</p:column>
+
+				<p:column style="width:115px;">
+					<p:commandButton icon="ui-icon-pencil" type="button" />
+					<p:commandButton icon="ui-icon-closethick" type="button" />
 				</p:column>
 
 			</p:dataTable>

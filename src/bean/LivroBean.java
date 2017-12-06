@@ -5,11 +5,10 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import com.ocpsoft.pretty.faces.annotation.URLAction;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
 
@@ -26,7 +25,8 @@ import model.Livro;
 @ViewScoped
 @URLMappings(mappings = { @URLMapping(id = "livros-index-1", pattern = "/livro", viewId = "/livro/index.xhtml"),
 		@URLMapping(id = "livros-index-2", pattern = "/livro/", viewId = "/livro/index.xhtml"),
-		@URLMapping(id = "livros-add", pattern = "/livro/add", viewId = "/livro/create.xhtml") })
+		@URLMapping(id = "livros-add", pattern = "/livro/add", viewId = "/livro/create.xhtml"),
+		@URLMapping(id = "livros-detalhe", pattern = "/livro/detalhe/#{livroBean.id}", viewId ="/livro/detalhe.xhtml")})
 public class LivroBean implements Serializable {
 	private static final long serialVersionUID = 3295081925699767392L;
 	private Livro livroAtual = new Livro();
@@ -34,7 +34,17 @@ public class LivroBean implements Serializable {
 	private List<Livro> livros = ld.buscarTodos();
 	private IEditoraDao ed = new EditoraDao();
 	private IAutorDao ad = new AutorDao();
+	private long id;
 
+	
+	public void setId(long id) {
+		this.id = id;
+	}
+	
+	public long getId() {
+		return id;
+	}
+	
 	public void setLivroAtual(Livro l) {
 		this.livroAtual = l;
 	}
@@ -52,7 +62,6 @@ public class LivroBean implements Serializable {
 	}
 
 	public void adicionar() {
-
 		System.out.println(livroAtual.getAutores().size());
 
 		// persiste editora se não existe na base
@@ -72,5 +81,15 @@ public class LivroBean implements Serializable {
 		livroAtual = new Livro();
 		FacesMessage msg = new FacesMessage("Livro adicionado!");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+	
+	@URLAction(mappingId="livros-detalhe")
+	public String buscar() {
+		livroAtual = ld.buscaPorId(id);
+		
+		if (livroAtual == null)
+			return "pretty:livros-index-1";
+		
+		return "null";
 	}
 }

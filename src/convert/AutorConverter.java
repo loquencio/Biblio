@@ -22,14 +22,11 @@ public class AutorConverter implements Converter {
 				try {
 					a = ad.buscaPorId(Long.parseLong(value));
 				} catch (NumberFormatException e) {
-
-				}
-				if (a == null) {
 					a = new Autor();
 					a.setNome(value);
 				}
-			} 
-			
+			}
+
 			return a;
 		}
 		return null;
@@ -38,8 +35,8 @@ public class AutorConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext fc, UIComponent uic, Object obj) {
 		if (obj != null) {
-			String retorno;
-			return ((retorno = String.valueOf(((Autor) obj).getId()))) == null ? ((Autor) obj).getNome() : retorno;
+			return String.valueOf(((Autor) obj).getId()).equals("0") ? String.valueOf(((Autor) obj).getNome())
+					: String.valueOf(((Autor) obj).getId());
 		} else {
 			return null;
 		}

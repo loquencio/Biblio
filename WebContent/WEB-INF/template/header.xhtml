@@ -1,17 +1,35 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <body>
-<!-- <div style="width:100%;font-size:36px;line-height:48px;background-color:navy;color:white">My Facelet Application</div> -->
+	<!-- <div style="width:100%;font-size:36px;line-height:48px;background-color:navy;color:white">My Facelet Application</div> -->
 
-<div class="ui-g" style="background-color:navy"> 
-	<div class="ui-g-4"/>
-	<div class="ui-g-4">
-		<p class="text-center font-weight-bold" style="font-size:36px; color:white; font-family=monospace">
-			Biblio
-		</p>
+	<div class="ui-g" style="background-color: #43f2a9">
+		<div class="ui-g-4" />
+		<div class="ui-g-4">
+			<p class="text-center font-weight-bold"
+				style="font-size: 36px; color: white;">Biblio</p>
+			<div class="ui-g">
+				<div class="ui-g-4" />
+				<div class="ui-g-4">
+					<p:megaMenu orientation="vertical"
+						style="background-color:#068256;background-image: none;">
+						<p:menuitem value="Livros  " url="/livro/"
+							styleClass="text-center font-weight-bold"
+							style="font-size: 20px; color: white;font-family:monospace" />
+						<p:menuitem value="   Addlivro" url="/livro/add"
+							styleClass="text-center font-weight-bold"
+							style="font-size: 20px; color: white;font-family:monospace" />
+					</p:megaMenu>
+				</div>
+				<div class="ui-g-4" />
+			</div>
+		</div>
+		<div class="ui-g-4" />
 	</div>
-	<div class="ui-g-4"/>
-</div>
 </body>
 </html>

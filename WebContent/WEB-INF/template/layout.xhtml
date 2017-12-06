@@ -14,7 +14,7 @@
 </h:head>
 
 <h:body>
-<!-- 	<div class="ui-g" >
+	<!-- 	<div class="ui-g" >
 		<div class="ui-g-4 " />
 		<div class="ui-g-4">
 			<p class="text-center">teste teste </p>
@@ -23,20 +23,20 @@
 	</div> -->
 	<div id="header">
 		<ui:insert name="header">
-			<ui:include src="header.xhtml"/>
+			<ui:include src="header.xhtml" />
 		</ui:insert>
 	</div>
 
 
 	<div id="content">
-		<p:growl globalOnly="true" showDetail="false"/>
+		<p:growl globalOnly="true" showDetail="false" />
 		<div class="ui-g">
 			<div class="ui-g-2" />
-			<div class="ui-g-8">			
+			<div class="ui-g-8">
 				<ui:insert name="content">
 				</ui:insert>
 			</div>
-			<div class="ui-g-2"/>
+			<div class="ui-g-2" />
 		</div>
 	</div>
 
@@ -45,9 +45,10 @@
 		</ui:insert>
 	</div>
 
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 		crossorigin="anonymous"></script>
+
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
 		integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"

@@ -9,6 +9,7 @@ import javax.faces.convert.FacesConverter;
 
 import dao.EditoraDao;
 import dao.IEditoraDao;
+import model.Autor;
 import model.Editora;
 
 @FacesConverter("editoraConverter")
@@ -41,10 +42,8 @@ public class EditoraConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext fc, UIComponent uic, Object obj) {
 		if (obj != null) {
-			String retorno;
-			return (retorno = String.valueOf(((Editora) obj).getId())) == "0"
-					? String.valueOf(((Editora) obj).getNome())
-					: retorno;
+			return String.valueOf(((Editora) obj).getId()).equals("0") ? String.valueOf(((Editora) obj).getNome())
+					: String.valueOf(((Editora) obj).getId());
 		} else {
 			return null;
 		}
