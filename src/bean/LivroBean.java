@@ -1,27 +1,29 @@
 package bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
 
+import dao.AutorDao;
 import dao.EditoraDao;
+import dao.IAutorDao;
 import dao.IEditoraDao;
 import dao.ILivroDao;
 import dao.LivroDao;
-import model.Editora;
+import model.Autor;
 import model.Livro;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 @URLMappings(mappings = { @URLMapping(id = "livros-index-1", pattern = "/livro", viewId = "/livro/index.xhtml"),
 		@URLMapping(id = "livros-index-2", pattern = "/livro/", viewId = "/livro/index.xhtml"),
 		@URLMapping(id = "livros-add", pattern = "/livro/add", viewId = "/livro/create.xhtml") })
@@ -31,6 +33,7 @@ public class LivroBean implements Serializable {
 	private ILivroDao ld = new LivroDao();
 	private List<Livro> livros = ld.buscarTodos();
 	private IEditoraDao ed = new EditoraDao();
+	private IAutorDao ad = new AutorDao();
 
 	public void setLivroAtual(Livro l) {
 		this.livroAtual = l;
@@ -49,9 +52,22 @@ public class LivroBean implements Serializable {
 	}
 
 	public void adicionar() {
-		// livroAtual.setLancamento(new Date());
+
+		System.out.println(livroAtual.getAutores().size());
+
+		// persiste editora se não existe na base
 		if (ed.buscaPorNomeIgual(livroAtual.getEditora().getNome()) == null)
 			ed.persistir(livroAtual.getEditora());
+
+		System.out.println("Adicionar livro");
+		// persiste autor se não existe na base
+		for (Autor a : livroAtual.getAutores()) {
+			System.out.println(a.getNome());
+			if (ad.buscaPorNomeIgual(a.getNome()) == null)
+				ad.persistir(a);
+		}
+
+		// persiste livro
 		ld.persistir(livroAtual);
 		livroAtual = new Livro();
 		FacesMessage msg = new FacesMessage("Livro adicionado!");

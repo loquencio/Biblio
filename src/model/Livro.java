@@ -1,8 +1,8 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity(name = "livros")
@@ -36,14 +35,13 @@ public class Livro {
 	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "escrito_por", joinColumns = { @JoinColumn(name = "livro_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "autor_id") })
-	private Set<Autor> autores;
+	private List<Autor> autores;
 
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "editora_id")
 	private Editora editora;
 
 	public Livro() {
-		this.autores = new HashSet<Autor>();
 	}
 
 	public long getId() {
@@ -80,6 +78,17 @@ public class Livro {
 
 	public Editora getEditora() {
 		return editora;
+	}
+	
+	public void setAutores(List<Autor> autores) {
+		this.autores = autores;
+		System.out.println(autores.size());
+		for (Autor a : autores)
+			System.out.println(a.getNome());
+	}
+	
+	public List<Autor> getAutores() {
+		return autores;
 	}
 
 	public void addAutor(Autor a) {

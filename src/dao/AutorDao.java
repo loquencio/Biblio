@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -38,14 +39,18 @@ public class AutorDao implements IAutorDao{
 
 	@Override
 	public List<Autor> buscaPorNomeSimilar(String nome) {
-		// TODO Auto-generated method stub
-		return null;
+		em = ResourceManager.getEntityManager();
+		TypedQuery<Autor> qry = em.createQuery("select a from autores a where upper(trim(a.nome)) like :n", Autor.class);
+		qry.setParameter("n", "%" + nome.trim().toUpperCase() + "%");
+		return qry.getResultList();
 	}
 
 	@Override
 	public Autor buscaPorId(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		em = ResourceManager.getEntityManager();
+		Autor a = em.find(Autor.class, (long) id);
+		em.close();
+		return a;
 	}
 
 	@Override

@@ -26,7 +26,15 @@
 									</p:inputText>
 								</h:panelGrid>
 
-								<p:outputLabel value="Resumo" for="resumo" />
+								<p:outputLabel value="Autores" for="autores" />
+								<p:autoComplete id="autores" multiple="true" dropdown="true"
+									value="#{livroBean.livroAtual.autores}"
+									completeMethod="#{autorBean.completeAutor}" var="autor"
+									itemLabel="#{autor.nome}" itemValue="#{autor}"
+									converter="autorConverter" forceSelection="true">
+								</p:autoComplete>
+
+								<p:outputLabel value="Sinopse" for="resumo" />
 								<h:panelGrid columns="4">
 									<p:inputTextarea id="resumo" rows="10" cols="75"
 										value="#{livroBean.livroAtual.resumo}" required="false" />

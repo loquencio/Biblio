@@ -19,11 +19,14 @@ public class EditoraConverter implements Converter {
 		if (value != null && value.trim().length() > 0) {
 
 			IEditoraDao ed = new EditoraDao();
-			Editora e = ed.buscaPorId(Long.parseLong(value));
-
+			Editora e = ed.buscaPorNomeIgual(value);
+			System.out.println(value);
 			if (e == null) {
-				e = ed.buscaPorNomeIgual(value);
+				try {
+					e = ed.buscaPorId(Long.parseLong(value));
+				} catch (NumberFormatException ex) {
 
+				}
 				if (e == null) {
 					e = new Editora();
 					e.setNome(value);
@@ -38,10 +41,10 @@ public class EditoraConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext fc, UIComponent uic, Object obj) {
 		if (obj != null) {
-			System.out.println(((Editora) obj).getNome());
 			String retorno;
 			return (retorno = String.valueOf(((Editora) obj).getId())) == "0"
-					? String.valueOf(((Editora) obj).getNome()) : retorno;
+					? String.valueOf(((Editora) obj).getNome())
+					: retorno;
 		} else {
 			return null;
 		}

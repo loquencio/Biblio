@@ -1,7 +1,9 @@
 package model;
 
 import java.text.ParseException;
+import java.util.List;
 
+import bean.AutorBean;
 import dao.AutorDao;
 import dao.EditoraDao;
 import dao.IAutorDao;
@@ -16,8 +18,8 @@ public class Teste {
 		IAutorDao ad = new AutorDao();
 		Editora e;
 		Autor a;
-
-		Livro l = new Livro();
+		AutorBean ab = new AutorBean();
+		/*Livro l = new Livro();
 		l.setNome("Subsolo");
 		l.setResumo("Felicidade");
 		
@@ -40,7 +42,17 @@ public class Teste {
 //		}
 		
 		l.addAutor(a);
-		ld.persistir(l);
+		ld.persistir(l);*/
+		
+		a = new Autor();
+		a.setNome("teste");
+		ad.persistir(a);
+		
+		List<Autor> autores = ab.completeAutor("Tur");
+		
+		for (Autor autor: autores)
+			System.out.println(autor.getNome());
+		
 		
 	}
 }

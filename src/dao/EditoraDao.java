@@ -47,13 +47,14 @@ public class EditoraDao implements IEditoraDao {
 	public Editora buscaPorNomeIgual(String nome) {
 		em = ResourceManager.getEntityManager();
 
-		TypedQuery<Editora> qry = em.createQuery("select e from editoras e where upper(e.nome) = upper(:n)", Editora.class);
+		TypedQuery<Editora> qry = em.createQuery("select e from editoras e where upper(trim(e.nome)) = upper(trim(:n))", Editora.class);
 		qry.setParameter("n", nome);
 		List<Editora> editoras = qry.getResultList();
-
+		em.close();
+		
 		if (editoras.size() > 0)
 			return editoras.get(0);
-
+		
 		return null;
 	}
 
@@ -61,10 +62,12 @@ public class EditoraDao implements IEditoraDao {
 	public List<Editora> buscaPorNomeParecido(String nome) {
 		em = ResourceManager.getEntityManager();
 		
-		TypedQuery<Editora> qry = em.createQuery("select e from editoras e where upper(trim(e.nome)) like :n", Editora.class);
-		qry.setParameter("n", "%" + nome.trim() + "%");
+		TypedQuery<Editora> qry = em.createQuery("select e from editoras e where upper(trim(e.nome)) like upper(trim(:n))", Editora.class);
+		qry.setParameter("n", "%" + nome + "%");
+		List<Editora> editoras = qry.getResultList();
+		em.close();
 		
-		return qry.getResultList();
+		return editoras;
 	}
 
 }
