@@ -25,8 +25,9 @@ import model.Livro;
 @ViewScoped
 @URLMappings(mappings = { @URLMapping(id = "livros-index-1", pattern = "/livro", viewId = "/livro/index.xhtml"),
 		@URLMapping(id = "livros-index-2", pattern = "/livro/", viewId = "/livro/index.xhtml"),
+		@URLMapping(id = "livros-index-3", pattern="/", viewId = "/livro/index.xhtml"),
 		@URLMapping(id = "livros-add", pattern = "/livro/add", viewId = "/livro/create.xhtml"),
-		@URLMapping(id = "livros-detalhe", pattern = "/livro/detalhe/#{id : livroBean.id}", viewId = "/livro/detalhe.xhtml") })
+		@URLMapping(id = "livros-detalhe", pattern = "/livro/#{id : livroBean.id}", viewId = "/livro/detalhe.xhtml") })
 public class LivroBean implements Serializable {
 	private static final long serialVersionUID = 3295081925699767392L;
 	private Livro livroAtual = new Livro();

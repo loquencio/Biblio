@@ -27,11 +27,12 @@
 			<h:panelGrid>
 				<p:dataTable value="#{livroBean.livros}" var="livro"
 					styleClass="table table-hover" style="vertical-align: middle">
-					<p:column headerText="Id">
+				<!-- 	<p:column headerText="Id">
 						<h:link outcome="pretty:livros-add">
 							<h:outputText value="#{livro.id}" />
 						</h:link>
-					</p:column>
+					</p:column> -->
+					
 					<p:column headerText="Nome">
 						<h:outputText value="#{livro.nome}" />
 					</p:column>
@@ -45,6 +46,9 @@
 						</ul>
 					</p:column>
 
+					<p:column headerText="Editora">
+						<h:outputText value="#{livro.editora.nome}"/>
+					</p:column>
 					<p:column headerText="Data">
 						<h:outputText value="#{livro.lancamento}">
 							<f:convertDateTime pattern="dd-MM-yyyy" />
