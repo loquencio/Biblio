@@ -2,7 +2,7 @@
 
 Bom dia (boa tarde (boa noite)), nobre viajante que recebeu a árdua tarefa de avaliar esse trabalho. 
 
-Esse proheti xinaiste em un CRUD (incompleto) de livros. Até o momento, você só pode incluir livros, mas prometo que até o final do dia 8\12, você já poderá alterar e deletar autores, editoraa e livros.
+Esse projeto consiste em um CRUD (incompleto) de livros. Até o momento, você só pode incluir livros, mas prometo que até o final do dia 8\12, você já poderá alterar e deletar autores, editoraa e livros.
 
 **Sobre o formulário de cadastro dos livros**
 
