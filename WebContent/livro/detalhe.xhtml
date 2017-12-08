@@ -8,13 +8,63 @@
 <ui:composition template="/WEB-INF/template/layout.xhtml">
 	<ui:define name="title">Gestão de Livros</ui:define>
 	<ui:define name="content">
-		<p:outputLabel value="Autores" for="autores" />
-		<p:autoComplete id="autores" multiple="true" dropdown="true"
-			value="#{livroBean.livroAtual.autores}"
-			completeMethod="#{autorBean.completeAutor}" var="autor"
-			itemLabel="#{autor.nome}" itemValue="#{autor}"
-			converter="autorConverter" forceSelection="true">
-		</p:autoComplete>
+		<div class="center_content">
+			<center>
+				<p:panel id="panel" header="Editar Livro">
+					<h:form>
+
+						<h:panelGrid columns="1" cellpadding="5px" cellspacing="3px">
+							<p:outputLabel value="Título: " for="titulo" />
+							<p:inplace id="titulo-inplace"
+								style="font-size:22px;font-style:italic;">
+								<p:inputText id="titulo" value="#{livroBean.livroAtual.nome}"
+									required="true" size="50" />
+							</p:inplace>
+
+							<p:outputLabel value="Autores: " for="autores" />
+							<p:autoComplete id="autores" multiple="true" dropdown="true"
+								value="#{livroBean.livroAtual.autores}"
+								completeMethod="#{autorBean.completeAutor}" var="autor"
+								itemLabel="#{autor.nome}" itemValue="#{autor}"
+								converter="autorConverter" forceSelection="true" required="true">
+							</p:autoComplete>
+
+
+							<p:outputLabel value="Sinopse: " for="resumo" />
+							<p:inplace id="resumo-inplace"
+								style="font-size:22px;font-style:italic;">
+								<p:inputTextarea id="resumo" rows="10" cols="75"
+									value="#{livroBean.livroAtual.resumo}" required="false" />
+							</p:inplace>
+
+							<p:outputLabel value="Data de publicação: " for="data" />
+							<p:inplace id="data-inplace"
+								style="font-size:22px;font-style:italic;">
+								<p:calendar id="data" value="#{livroBean.livroAtual.lancamento}"
+									pattern="dd-MM-yyyy" mask="true">
+									<f:convertDateTime pattern="#{component.pattern}" />
+								</p:calendar>
+							</p:inplace>
+
+							<p:outputLabel value="Editora" for="editora" />
+							<p:inplace id="editora-inplace"
+								style="font-size:22px;font-style:italic;"
+								label="#{livroBean.livroAtual.editora.nome}">
+								<p:autoComplete id="editora" forceSelection="false"
+									dropdown="true" value="#{livroBean.livroAtual.editora}"
+									completeMethod="#{editoraBean.completeEditora}" var="editora"
+									itemLabel="#{editora.nome}" itemValue="#{editora}"
+									converter="editoraConverter" />
+							</p:inplace>
+
+							<p:commandButton icon="ui-icon-disk"
+								actionListener="#{livroBean.adicionar}" ajax="false"
+								title="Salvar" />
+						</h:panelGrid>
+					</h:form>
+				</p:panel>
+			</center>
+		</div>
 	</ui:define>
 </ui:composition>
 </html>

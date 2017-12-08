@@ -14,6 +14,7 @@ public class AutorConverter implements Converter {
 
 	@Override
 	public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
+		System.out.println("getAsObject Autor");
 		if (value != null && value.trim().length() > 0) {
 			IAutorDao ad = new AutorDao();
 			Autor a = ad.buscaPorNomeIgual(value);
@@ -34,7 +35,10 @@ public class AutorConverter implements Converter {
 
 	@Override
 	public String getAsString(FacesContext fc, UIComponent uic, Object obj) {
+		System.out.println("getAsString autor");
 		if (obj != null) {
+			System.out.println(String.valueOf(((Autor) obj).getId()).equals("0") ? String.valueOf(((Autor) obj).getNome())
+					: String.valueOf(((Autor) obj).getId()) + "retorno getAss Autor");
 			return String.valueOf(((Autor) obj).getId()).equals("0") ? String.valueOf(((Autor) obj).getNome())
 					: String.valueOf(((Autor) obj).getId());
 		} else {

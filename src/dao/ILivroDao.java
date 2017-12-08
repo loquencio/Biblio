@@ -9,4 +9,5 @@ public interface ILivroDao {
 	Livro buscaPorId(long id);
 	List<Livro> buscarTodos();
 	List<Livro> buscaPorNome(String nome);
+	void remover(long id);
 }

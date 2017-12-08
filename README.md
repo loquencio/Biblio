@@ -6,6 +6,8 @@ Esse projeto consiste em um CRUD (incompleto) de livros. Até o momento, você s
 
 **Sobre o formulário de cadastro dos livros**
 
+**PRONTO, ADICIONEI OS RECURSOS DE ALTERAR E EXCLUIR LIVROS. ESPERO QUE ESTEJA FUNCIONAL.**
+
 Rnquanto cadaatra livros, você perceberá que os campos "Autores" e "Editora" são automaticamente completados. Se voce ainda nao adicionou os autores ou a editora que gostaria de amarrar ao livro, você pode simplesmente fazer isso digitando seus nomes e apertando ENTER, ou clicando no dropdown que aparece.
 
 

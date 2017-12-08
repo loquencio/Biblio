@@ -26,7 +26,7 @@ import model.Livro;
 @URLMappings(mappings = { @URLMapping(id = "livros-index-1", pattern = "/livro", viewId = "/livro/index.xhtml"),
 		@URLMapping(id = "livros-index-2", pattern = "/livro/", viewId = "/livro/index.xhtml"),
 		@URLMapping(id = "livros-add", pattern = "/livro/add", viewId = "/livro/create.xhtml"),
-		@URLMapping(id = "livros-detalhe", pattern = "/livro/detalhe/#{livroBean.id}", viewId ="/livro/detalhe.xhtml")})
+		@URLMapping(id = "livros-detalhe", pattern = "/livro/detalhe/#{id : livroBean.id}", viewId = "/livro/detalhe.xhtml") })
 public class LivroBean implements Serializable {
 	private static final long serialVersionUID = 3295081925699767392L;
 	private Livro livroAtual = new Livro();
@@ -35,16 +35,25 @@ public class LivroBean implements Serializable {
 	private IEditoraDao ed = new EditoraDao();
 	private IAutorDao ad = new AutorDao();
 	private long id;
+	private Livro livroSelecionado = new Livro();
 
-	
 	public void setId(long id) {
 		this.id = id;
 	}
-	
+
 	public long getId() {
 		return id;
 	}
-	
+
+	public void setLivroSelecionado(Livro l) {
+		System.out.println("get " + l.getId() + l.getNome());
+		this.livroSelecionado = l;
+	}
+
+	public Livro getLivroSelecionado() {
+		return livroSelecionado;
+	}
+
 	public void setLivroAtual(Livro l) {
 		this.livroAtual = l;
 	}
@@ -82,14 +91,30 @@ public class LivroBean implements Serializable {
 		FacesMessage msg = new FacesMessage("Livro adicionado!");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-	
-	@URLAction(mappingId="livros-detalhe")
+
+	@URLAction(mappingId = "livros-detalhe")
 	public String buscar() {
 		livroAtual = ld.buscaPorId(id);
-		
+
 		if (livroAtual == null)
 			return "pretty:livros-index-1";
-		
+
 		return "null";
+	}
+
+	public String excluir() {
+		System.out.println("Tá me chamando sim");
+		if (livroSelecionado != null) {
+			System.out.println(livroSelecionado.getId()  + livroSelecionado.getNome());
+			ld.remover(livroSelecionado.getId());
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Livro removido!", "Livro removido!");
+		} else {
+			System.out.println("Tô nulo");
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Livro não encontrado!",
+					"Livro não encontrado!");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+		}
+		
+		return "pretty:livros-index-1";
 	}
 }

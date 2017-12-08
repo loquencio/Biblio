@@ -10,6 +10,7 @@
 <ui:composition template="/WEB-INF/template/layout.xhtml">
 	<ui:define name="title">Gestão de Livros</ui:define>
 	<ui:define name="content">
+		<p:growl globalOnly="true" />
 		<!-- 		<h:panelGrid>
 			<h:dataTable value="#{livroBean.livros}" var="livro"
 				styleClass="table table-hover">
@@ -22,39 +23,61 @@
 			</h:dataTable>
 
 		</h:panelGrid> -->
-		<h:panelGrid>
-			<p:dataTable value="#{livroBean.livros}" var="livro"
-				styleClass="table table-hover" style="vertical-align: middle">
-				<p:column headerText="Id">
-					<h:link outcome="pretty:livros-add">
-						<h:outputText value="#{livro.id}" />
-					</h:link>
-				</p:column>
-				<p:column headerText="Nome">
-					<h:outputText value="#{livro.nome}" />
-				</p:column>
+		<h:form id="lista">
+			<h:panelGrid>
+				<p:dataTable value="#{livroBean.livros}" var="livro"
+					styleClass="table table-hover" style="vertical-align: middle">
+					<p:column headerText="Id">
+						<h:link outcome="pretty:livros-add">
+							<h:outputText value="#{livro.id}" />
+						</h:link>
+					</p:column>
+					<p:column headerText="Nome">
+						<h:outputText value="#{livro.nome}" />
+					</p:column>
 
-				<p:column headerText="Autor(es)">
-					<ul style="list-style-type: none;">
-						<ui:repeat value="#{livro.autores}" var="autor">
-							<li style="float: left;"><h:outputText value="#{autor.nome}" /></li>
-						</ui:repeat>
-					</ul>
-				</p:column>
+					<p:column headerText="Autor(es)">
+						<ul style="list-style-type: none;">
+							<ui:repeat value="#{livro.autores}" var="autor">
+								<li style="float: left;"><h:outputText
+										value="#{autor.nome}" /></li>
+							</ui:repeat>
+						</ul>
+					</p:column>
 
-				<p:column headerText="Data">
-					<h:outputText value="#{livro.lancamento}">
-						<f:convertDateTime pattern="dd-MM-yyyy" />
-					</h:outputText>
-				</p:column>
+					<p:column headerText="Data">
+						<h:outputText value="#{livro.lancamento}">
+							<f:convertDateTime pattern="dd-MM-yyyy" />
+						</h:outputText>
+					</p:column>
 
-				<p:column style="width:115px;">
-					<p:commandButton icon="ui-icon-pencil" type="button" />
-					<p:commandButton icon="ui-icon-closethick" type="button" />
-				</p:column>
+					<p:column style="width:150px;">
+						<p:link outcome="pretty:livros-detalhe" value="Editar"
+							style="margin-right:30px;">
+							<f:param name="id" value="#{livro.id}" />
+						</p:link>
 
-			</p:dataTable>
-		</h:panelGrid>
+						<p:commandLink value="Excluir" action="#{livroBean.excluir}">
+
+							<p:confirm header="Tem certeza?"
+								message="Quer excluir esse belo livro mesmo?"
+								icon="ui-icon-alert" />
+							<f:setPropertyActionListener value="#{livro}"
+								target="#{livroBean.livroSelecionado}" />
+
+						</p:commandLink>
+
+						<p:confirmDialog id="popconfirma" global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Sim" type="button"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							<p:commandButton value="Não" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
+					</p:column>
+
+				</p:dataTable>
+			</h:panelGrid>
+		</h:form>
 	</ui:define>
 </ui:composition>
 </html>

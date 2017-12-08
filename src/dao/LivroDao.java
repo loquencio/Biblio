@@ -52,4 +52,16 @@ public class LivroDao implements ILivroDao {
 		em.close();
 		return qry.getResultList();
 	}
+
+	@Override
+	public void remover(long id) {
+		em = ResourceManager.getEntityManager();
+		em.getTransaction().begin();
+		Livro l = em.find(Livro.class, (long) id);
+		if (l != null) {
+			em.remove(l);
+		}
+		em.getTransaction().commit();
+		em.close();
+	}
 }

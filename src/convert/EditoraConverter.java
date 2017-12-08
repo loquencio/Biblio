@@ -17,6 +17,7 @@ public class EditoraConverter implements Converter {
 
 	@Override
 	public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
+		System.out.println("getASObject Editora");
 		if (value != null && value.trim().length() > 0) {
 
 			IEditoraDao ed = new EditoraDao();
@@ -41,7 +42,10 @@ public class EditoraConverter implements Converter {
 
 	@Override
 	public String getAsString(FacesContext fc, UIComponent uic, Object obj) {
+		System.out.println("getASString editora");
 		if (obj != null) {
+			System.out.println(String.valueOf(((Editora) obj).getId()).equals("0") ? String.valueOf(((Editora) obj).getNome())
+					: String.valueOf(((Editora) obj).getId()) + " retorno getass editora");
 			return String.valueOf(((Editora) obj).getId()).equals("0") ? String.valueOf(((Editora) obj).getNome())
 					: String.valueOf(((Editora) obj).getId());
 		} else {
